@@ -1,0 +1,64 @@
+# tomsaliba.com
+
+Personal site for Tom Saliba, built on the same design system as aaroncharlesedwards.com: a single-page static HTML site (no build step, no framework) designed for Netlify hosting.
+
+This repository is the site's permanent home. It was originally staged as a `tomsaliba-site/` folder inside the `aaroncharlesedwards-site` repo (reviewed via that repo's deploy previews) and has been moved here for launch.
+
+## What's in the box
+
+| File | Purpose |
+|---|---|
+| `index.html` | The entire site: markup, styles, and scripts in one file |
+| `tom-headshot-placeholder.svg` | Temporary hero portrait — replace with a real photo |
+| `favicon.*`, `apple-touch-icon.png` | "TS" monogram icons, all sizes |
+| `netlify.toml` | Netlify config (static publish, deploy previews) |
+| `robots.txt`, `sitemap.xml` | SEO basics, already pointed at tomsaliba.com |
+| `CONTENT-CHECKLIST.md` | Every placeholder that needs Tom's real content |
+
+## Launch steps
+
+### 1. Connect Netlify
+
+1. In Netlify: **Add new site → Import an existing project → GitHub** → pick this repo (`aaronedwards86/tomsaliba`).
+2. Build command: leave **empty**. Publish directory: `.` (the `netlify.toml` already says this).
+3. Deploy. You'll get a `something.netlify.app` URL immediately — use it to review with Tom.
+
+### 2. Point the domain
+
+1. Buy `tomsaliba.com` (Netlify can register it, or use any registrar).
+2. In Netlify: **Domain management → Add custom domain** → `tomsaliba.com`.
+3. If the domain is at an external registrar, either switch its nameservers to Netlify DNS (easiest) or add the A/CNAME records Netlify shows you.
+4. HTTPS is provisioned automatically once DNS resolves.
+
+### 3. Turn on the contact form
+
+The form is already wired for **Netlify Forms** (`data-netlify="true"`). After the first deploy:
+
+1. In Netlify: **Forms** → confirm the `contact` form was detected.
+2. **Form notifications** → add Tom's email so submissions land in his inbox.
+
+If the site is ever hosted somewhere other than Netlify, swap the form for a [Formspree](https://formspree.io) endpoint instead.
+
+### 4. Finish the content
+
+The copy is drawn from Tom's 2026 CV — hero, experience cards, track-record numbers, about story, and lecturing credentials are all real. What remains is in `CONTENT-CHECKLIST.md`, chiefly:
+
+- **Portrait** — a real editorial photo saved as `tom-headshot.jpg` (3:4 crop, ≥1000px wide), then update the hero `<img src>`; the OG image path in `<head>` already expects that filename.
+- **LinkedIn URL** — contact section, footer, and JSON-LD `sameAs`.
+- **Email confirmation** — currently the CV's `saliba_t@hotmail.com`.
+- **Tom's sign-off** on the published numbers.
+
+Two sections ship **hidden** until there's real content for them (search `display:none` in `index.html`): the featured video in Lecturing, and the entire Press section.
+
+### 5. Post-launch polish
+
+- Add the site to [Google Search Console](https://search.google.com/search-console) and drop the verification meta tag into `<head>`.
+- Submit `https://tomsaliba.com/sitemap.xml` there.
+- Expand the JSON-LD Person schema in `<head>` with `jobTitle`, `worksFor`, and `sameAs` (LinkedIn) once the facts are final.
+- Test on a phone — the layout is responsive, but check the hero photo crop.
+
+## Editing notes
+
+- Everything is in `index.html`. Styles are in the `<style>` block, organized by section with `── Section ──` comment banners.
+- Colors and fonts are CSS variables at the top of the `<style>` block (`--bg`, `--text`, `--accent`, etc.) — change the whole palette in one place.
+- The scrolling logo strip needs its list of logos duplicated once, back to back, for the seamless loop.
